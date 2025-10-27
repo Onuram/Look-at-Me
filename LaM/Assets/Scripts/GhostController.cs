@@ -12,6 +12,10 @@ public class GhostController : MonoBehaviour
     public float viewAngleThreshold = 60f;
     private Quaternion _lookRotation;
     private Vector3 _direction;
+    private int delay;
+    public int delayAmmount = 60;
+
+
 
 
     void Update()
@@ -29,14 +33,22 @@ public class GhostController : MonoBehaviour
         _lookRotation = Quaternion.LookRotation(_direction);
         transform.rotation = Quaternion.Slerp(transform.rotation, _lookRotation,
             Time.deltaTime * rotationSpeed);
-        
-        imageText.gameObject.SetActive(!isSeen || !inLineOfSight);
 
         if (!isSeen || !inLineOfSight)
         {
-            transform.position = Vector3.MoveTowards(transform.position,
-                target.position, speed * Time.deltaTime);
+            if (delay > delayAmmount)
+            {
+                transform.position = Vector3.MoveTowards(transform.position,
+                    target.position, speed * Time.deltaTime);
+            }
+            delay++;
         }
+        else
+        {
+            delay = 0;
+        }
+        
+        imageText.gameObject.SetActive(delay>delayAmmount);
     }
     
     bool IsInLineOfSight()
