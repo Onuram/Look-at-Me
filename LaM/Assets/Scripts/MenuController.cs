@@ -1,7 +1,6 @@
 using System.IO;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 using TMPro;
 
 [System.Serializable]
@@ -9,6 +8,7 @@ public class PlayerData
 {
     public string playerName;
     public int coins;
+    public int ghostSpeed;
 }
 
 public class MenuController : MonoBehaviour
@@ -25,7 +25,6 @@ public class MenuController : MonoBehaviour
 
     public void BtnStart()
     {
-        SaveGame();
         SceneManager.LoadScene("Gameplay");
     }
     public void BtnSettings()
@@ -41,6 +40,11 @@ public class MenuController : MonoBehaviour
     public void BtnMenu()
     {
         SceneManager.LoadScene("Main Menu");
+    }
+
+    public void BtnRanking()
+    {
+        SceneManager.LoadScene("Rank Screen");
     }
 
     public void BtnExit()

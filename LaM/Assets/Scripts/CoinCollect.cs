@@ -14,6 +14,7 @@ public class CoinCollect : MonoBehaviour
     {
         coins = PlayerPrefs.GetInt("coins");
         allCoins = GameObject.FindGameObjectsWithTag("Coin");
+        ghost.speed = PlayerPrefs.GetFloat("ghostSpeed");
     }
     private void Update()
     {

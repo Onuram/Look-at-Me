@@ -7,6 +7,8 @@ public class GhostTrigger : MonoBehaviour
     private string filePath;
     public CoinCollect coinCollect;
     private int coinCount;
+    public RankingManager rankingManager;
+    public GhostController ghost;
 
     private void Start()
     {
@@ -18,7 +20,11 @@ public class GhostTrigger : MonoBehaviour
         {
             coinCount = coinCollect.CoinScore();
             PlayerData data = LoadGame();
+            PlayerPrefs.SetFloat("ghostSpeed", ghost.speed);
             SaveGame(data);
+
+            rankingManager.UpdateRanking(data);
+
             SceneManager.LoadScene("Lose Screen");
         }
     }
