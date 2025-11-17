@@ -25,6 +25,11 @@ public class MenuController : MonoBehaviour
 
     public void BtnStart()
     {
+        SaveGame();
+        SceneManager.LoadScene("Gameplay");
+    }
+    public void BtnContinue()
+    {
         SceneManager.LoadScene("Gameplay");
     }
     public void BtnSettings()

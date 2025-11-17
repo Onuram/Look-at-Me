@@ -1,6 +1,7 @@
 using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
+using System;
 
 public class CoinCollect : MonoBehaviour
 {
@@ -9,12 +10,20 @@ public class CoinCollect : MonoBehaviour
     private GameObject[] allCoins;
     public GhostController ghost;
     private bool coinChecked;
+    private float dificulty;
+    private int deathToll;
 
     private void Start()
     {
         coins = PlayerPrefs.GetInt("coins");
         allCoins = GameObject.FindGameObjectsWithTag("Coin");
-        ghost.speed = PlayerPrefs.GetFloat("ghostSpeed");
+
+        deathToll = coins % 10;
+        coins = coins - deathToll;
+
+        dificulty = coins / 10;
+        dificulty = (float)Math.Ceiling(dificulty);
+        ghost.speed = 3f + dificulty;
     }
     private void Update()
     {
@@ -30,7 +39,7 @@ public class CoinCollect : MonoBehaviour
             coinChecked = false;
         }
 
-        if (coins == 100)
+        if (coins >= 100)
         {
             Win();
         }
@@ -41,7 +50,6 @@ public class CoinCollect : MonoBehaviour
         if (other.CompareTag("Coin"))
         {
             coins++;
-            //Debug.Log("Moeda coletada");
             PlayerPrefs.SetInt("coins", coins);
             PlayerPrefs.Save();
             coinChecked = true;
@@ -51,7 +59,7 @@ public class CoinCollect : MonoBehaviour
 
     private void UpdateUI()
     {
-        coinText.text = "Moedas: " + coins;
+        coinText.text = coins + "/100 ";
     }
 
     public void Win()
@@ -63,5 +71,8 @@ public class CoinCollect : MonoBehaviour
     {
         return coins;
     }
+
+    
+    
 
 }
