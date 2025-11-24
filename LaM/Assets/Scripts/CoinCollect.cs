@@ -39,10 +39,6 @@ public class CoinCollect : MonoBehaviour
             coinChecked = false;
         }
 
-        if (coins >= 100)
-        {
-            Win();
-        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -60,11 +56,6 @@ public class CoinCollect : MonoBehaviour
     private void UpdateUI()
     {
         coinText.text = coins + "/100 ";
-    }
-
-    public void Win()
-    {
-        SceneManager.LoadScene("Win Screen");
     }
 
     public int CoinScore()

@@ -14,6 +14,19 @@ public class GhostTrigger : MonoBehaviour
     {
         filePath = Application.persistentDataPath + "/playerdata.json";
     }
+
+    private void Update()
+    {
+        coinCount = coinCollect.CoinScore();
+        if (coinCount >= 100)
+        {
+            PlayerData data = LoadGame();
+            SaveGame(data);
+            rankingManager.UpdateRanking(data);
+            SceneManager.LoadScene("Win Screen");
+        }
+
+    }
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
