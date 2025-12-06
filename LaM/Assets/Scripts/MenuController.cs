@@ -9,6 +9,7 @@ public class PlayerData
     public string playerName;
     public int coins;
     public int ghostSpeed;
+    public int lifes;
 }
 
 public class MenuController : MonoBehaviour
